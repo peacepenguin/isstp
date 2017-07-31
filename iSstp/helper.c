@@ -18,6 +18,9 @@ int main(int argc, char* argv[])
         system(buf);
     } else if (!strcmp(argv[1], "stop")) {
         system("killall sstpc helper");
+    } else if (!strcmp(argv[1], "route") && argc > 2) {
+        sprintf(buf, "route add -net %s -interface ppp0", argv[2]);
+        system(buf);
     } else {
         return -1;
     }

@@ -567,8 +567,8 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="zRf-U8-fEK" name="enabled" keyPath="values.useExtSstpc" id="lhR-UM-ACS"/>
                                     <binding destination="zRf-U8-fEK" name="value" keyPath="values.sstpcPath" id="5sv-PI-qeM"/>
+                                    <binding destination="zRf-U8-fEK" name="enabled" keyPath="values.useExtSstpc" id="lhR-UM-ACS"/>
                                 </connections>
                             </textField>
                         </subviews>
@@ -660,13 +660,41 @@ Gw
                                 </buttonCell>
                             </button>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g37-e2-P7W">
-                                <rect key="frame" x="20" y="80" width="464" height="81"/>
+                                <rect key="frame" x="20" y="103" width="464" height="75"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="tz3-m4-RUO">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
+                            </textField>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FVa-4r-lX0">
+                                <rect key="frame" x="18" y="73" width="86" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="check" title="Add route:" bezelStyle="regularSquare" imagePosition="left" inset="2" id="dbC-Cm-0Dh">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <binding destination="DRC-5v-2i9" name="value" keyPath="self.account.addRoute" id="nPc-Hs-62M"/>
+                                </connections>
+                            </button>
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V9x-XY-vwG">
+                                <rect key="frame" x="110" y="71" width="131" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="192.168.0.0/24" drawsBackground="YES" id="vIM-sA-GgR">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <binding destination="DRC-5v-2i9" name="enabled" keyPath="self.account.addRoute" id="dX7-7B-v4j"/>
+                                    <binding destination="DRC-5v-2i9" name="value" keyPath="self.account.route" id="82k-BM-SVo">
+                                        <dictionary key="options">
+                                            <string key="NSNullPlaceholder">192.168.0.0/24</string>
+                                        </dictionary>
+                                    </binding>
+                                </connections>
                             </textField>
                         </subviews>
                     </view>

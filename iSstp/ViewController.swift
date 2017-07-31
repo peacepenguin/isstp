@@ -22,6 +22,8 @@ class ViewController: NSViewController, NSTableViewDelegate {
     dynamic var accounts: [Account] = []
     let ud = UserDefaults.standard
     var statusTimer: Timer?
+    var connectTimer: Timer?
+    var connectCounter = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,13 +40,46 @@ class ViewController: NSViewController, NSTableViewDelegate {
         tableViewSelectionDidChange(notif)
     }
 
-    func sstpStatus() {
+    func sstpIp() -> String? {
         let result: String = runCommand("/sbin/ifconfig ppp0 | grep 'inet' | awk '{ print $2}'")
-
         if result.range(of: "ppp0") == nil && result.characters.count != 0 {
-            status.stringValue = "Connected to server, your ip is: " + result
+            return result
+        }
+        return nil
+    }
+
+    func sstpConnecting() {
+        connectCounter += 1
+
+        let timeout = connectCounter >= 10
+
+        if sstpIp() == nil && !timeout {
+            return
+        }
+        connectTimer?.invalidate()
+        connectTimer = nil
+        connectCounter = 0
+
+        let account = accounts[arrayController.selectionIndex]
+        if account.addRoute && !timeout {
+            let cmd = Bundle.main.resourcePath! + "/helper"
+            let ret = runCommand("\(cmd) route \(account.route!)")
+            print(ret)
+        }
+        sstpStatus()
+    }
+
+    func sstpStatus() {
+        if let ip = sstpIp() {
+            status.stringValue = "Connected to server, your ip is: " + ip
         } else {
             status.stringValue = "Not Connected!"
+        }
+
+        if statusTimer == nil {
+            statusTimer = Timer.scheduledTimer(
+                timeInterval: 5, target: self, selector: #selector(ViewController.sstpStatus), userInfo: nil,
+                repeats: true)
         }
     }
 
@@ -59,7 +94,7 @@ class ViewController: NSViewController, NSTableViewDelegate {
         let qualityOfServiceClass = DispatchQoS.QoSClass.background
         let backgroundQueue = DispatchQueue.global(qos: qualityOfServiceClass)
 
-        status.stringValue = "Try to connect " + ac.server + "..."
+        status.stringValue = "Try to connect to " + ac.server + "..."
 
         backgroundQueue.async(execute: {
             let task = Process()
@@ -100,7 +135,9 @@ class ViewController: NSViewController, NSTableViewDelegate {
 
             print(output, terminator: "")
         })
-        self.statusTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(ViewController.sstpStatus), userInfo: nil, repeats: true)
+        self.connectTimer = Timer.scheduledTimer(
+            timeInterval: 1, target: self, selector: #selector(ViewController.sstpConnecting), userInfo: nil,
+            repeats: true)
     }
 
     @IBAction func stop(_ sender: AnyObject) {
