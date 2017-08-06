@@ -22,6 +22,42 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         statusItem?.image = image
         statusItem?.highlightMode = true
         statusItem?.menu = myMenu
+
+        var accounts: [Account] = []
+
+        let ud = UserDefaults.standard
+        if let data = ud.object(forKey: "accounts") as? Data {
+            let unarc = NSKeyedUnarchiver(forReadingWith: data)
+            accounts = unarc.decodeObject(forKey: "root") as! [Account]
+        }
+
+        if accounts.isEmpty {
+            return
+        }
+
+        myMenu.insertItem(NSMenuItem.separator(), at: 0)
+
+        for account in accounts {
+            let menuItem = NSMenuItem(title: "Connect \(account.display)", action: #selector(AppDelegate.connect),
+                                      keyEquivalent: "")
+            menuItem.target = self
+            menuItem.representedObject = account
+            myMenu.insertItem(menuItem, at: 0)
+        }
+    }
+
+    func connect(_ sender: NSMenuItem) {
+        let account = sender.representedObject as! Account
+        Sstp.sharedInstance.connect(account)
+        sender.action = #selector(AppDelegate.disconnect)
+        sender.title = "Disconnect \(account.display)"
+    }
+
+    func disconnect(_ sender: NSMenuItem) {
+        let account = sender.representedObject as! Account
+        Sstp.sharedInstance.disconnect()
+        sender.action = #selector(AppDelegate.connect)
+        sender.title = "Connect \(account.display)"
     }
 
     func doScriptWithAdmin(_ inScript:String) {
