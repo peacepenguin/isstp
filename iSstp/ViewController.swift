@@ -21,9 +21,6 @@ class ViewController: NSViewController, NSTableViewDelegate {
 
     dynamic var accounts: [Account] = []
     let ud = UserDefaults.standard
-    var statusTimer: Timer?
-    var connectTimer: Timer?
-    var connectCounter = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,51 +33,12 @@ class ViewController: NSViewController, NSTableViewDelegate {
         tableView.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.stop(_:)), name: NSNotification.Name(rawValue: "All Stop"), object: nil)
 
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.updateStatus(_:)),
+                                               name: NSNotification.Name(rawValue: "Connection status changed"),
+                                               object: nil)
+
         let notif: Notification = Notification(name: Notification.Name(rawValue: "init"), object:self)
         tableViewSelectionDidChange(notif)
-    }
-
-    func sstpIp() -> String? {
-        let result: String = runCommand("/sbin/ifconfig ppp0 | grep 'inet' | awk '{ print $2}'")
-        if result.range(of: "ppp0") == nil && result.characters.count != 0 {
-            return result
-        }
-        return nil
-    }
-
-    func sstpConnecting() {
-        connectCounter += 1
-
-        let timeout = connectCounter >= 10
-
-        if sstpIp() == nil && !timeout {
-            return
-        }
-        connectTimer?.invalidate()
-        connectTimer = nil
-        connectCounter = 0
-
-        let account = accounts[arrayController.selectionIndex]
-        if account.addRoute && !timeout {
-            let cmd = Bundle.main.resourcePath! + "/helper"
-            let ret = runCommand("\(cmd) route \(account.route!)")
-            print(ret)
-        }
-        sstpStatus()
-    }
-
-    func sstpStatus() {
-        if let ip = sstpIp() {
-            status.stringValue = "Connected to server, your ip is: " + ip
-        } else {
-            status.stringValue = "Not Connected!"
-        }
-
-        if statusTimer == nil {
-            statusTimer = Timer.scheduledTimer(
-                timeInterval: 5, target: self, selector: #selector(ViewController.sstpStatus), userInfo: nil,
-                repeats: true)
-        }
     }
 
     @IBAction func saveConfig(_ sender: AnyObject) {
@@ -89,99 +47,15 @@ class ViewController: NSViewController, NSTableViewDelegate {
     }
 
     @IBAction func connect(_ sender: AnyObject) {
-        let ac = accounts[arrayController.selectionIndex]
+        Sstp.sharedInstance.connect(accounts[arrayController.selectionIndex])
+    }
 
-        let qualityOfServiceClass = DispatchQoS.QoSClass.background
-        let backgroundQueue = DispatchQueue.global(qos: qualityOfServiceClass)
-
-        status.stringValue = "Try to connect to " + ac.server + "..."
-
-        backgroundQueue.async(execute: {
-            let task = Process()
-            let base = Bundle.main.resourcePath
-
-            task.launchPath = base! + "/helper"
-
-            var sstpcPath = base! + "/sstpc"
-            if self.ud.bool(forKey: "useExtSstpc") {
-                sstpcPath = self.ud.string(forKey: "sstpcPath")!
-            }
-
-            task.arguments = [
-                "start",
-                sstpcPath + " " + ac.doesSkipCertWarn!,
-                ac.user,
-                "'" + ac.pass.replacingOccurrences(of: "'", with: "'\"'\"'") + "'",
-                ac.server,
-                ac.option!
-            ]
-
-            let pipe = Pipe()
-            task.standardOutput = pipe
-            task.launch()
-
-            let data = pipe.fileHandleForReading.readDataToEndOfFile()
-            let output: String = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
-
-            if output.range(of: "server certificate failed") != nil {
-                if (self.statusTimer != nil)
-                {
-                    self.statusTimer?.invalidate()
-                    self.statusTimer = nil
-                }
-
-                self.status.stringValue = "Verification of server certificate failed"
-            }
-
-            print(output, terminator: "")
-        })
-        self.connectTimer = Timer.scheduledTimer(
-            timeInterval: 1, target: self, selector: #selector(ViewController.sstpConnecting), userInfo: nil,
-            repeats: true)
+    @IBAction func updateStatus(_ sender: AnyObject) {
+        status.stringValue = Sstp.sharedInstance.status
     }
 
     @IBAction func stop(_ sender: AnyObject) {
-        if (self.statusTimer != nil)
-        {
-            self.statusTimer?.invalidate()
-            self.statusTimer = nil
-        }
-
-        let qualityOfServiceClass = DispatchQoS.QoSClass.background
-        let backgroundQueue = DispatchQueue.global(qos: qualityOfServiceClass)
-
-        backgroundQueue.async(execute: {
-            let task = Process()
-            let base = Bundle.main.resourcePath
-
-            task.launchPath = base! + "/helper"
-
-            task.arguments = ["stop"]
-
-            let pipe = Pipe()
-            task.standardOutput = pipe
-            task.launch()
-
-            let data = pipe.fileHandleForReading.readDataToEndOfFile()
-            let output: String = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
-
-            print(output, terminator: "")
-        })
-        status.stringValue = "Not Connected!"
-    }
-
-    func runCommand(_ cmd: String) -> String {
-        let task = Process()
-
-        task.launchPath = "/bin/sh"
-        task.arguments = ["-c", cmd]
-
-        let pipe = Pipe()
-        task.standardOutput = pipe
-        task.launch()
-        let data = pipe.fileHandleForReading.readDataToEndOfFile()
-        let output: String = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
-        return output
+        Sstp.sharedInstance.disconnect()
     }
 
     @IBAction func deleteBtnPressed(_ sender: AnyObject) {
