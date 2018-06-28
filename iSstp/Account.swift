@@ -21,6 +21,9 @@ class Account: NSObject {
     var option: String?
     var defaultOption: String = "usepeerdns require-mschap-v2 refuse-eap noauth noipdefault defaultroute"
 
+    var addRoute: Bool = false
+    var route: String?
+
     override init() {
         doesSkipCertWarn = doesSkipCertWarnDefault
         option = defaultOption
@@ -54,6 +57,14 @@ class Account: NSObject {
         } else {
             self.option = defaultOption
         }
+
+        self.addRoute = aDecoder.decodeBool(forKey: "addRoute")
+
+        if let ret = aDecoder.decodeObject(forKey: "route") as? String {
+            self.route = ret
+        } else {
+            self.route = ""
+        }
     }
 
     func encodeWithCoder(_ aCoder: NSCoder) {
@@ -68,5 +79,9 @@ class Account: NSObject {
         aCoder.encode(self.doesSkipCertWarn, forKey: "doesSkipCertWarn")
 
         aCoder.encode(self.option, forKey: "option")
+
+        aCoder.encode(self.addRoute, forKey: "addRoute")
+
+        aCoder.encode(self.route, forKey: "route")
     }
 }

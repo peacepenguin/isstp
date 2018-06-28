@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		50C2CCA01F37131C00C24D9D /* Sstp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C2CC9F1F37131C00C24D9D /* Sstp.swift */; };
 		53013D631A9E89FC00C5D631 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 534F321B1A9E402C001B7745 /* logo.png */; };
 		53013D681A9E8B9D00C5D631 /* statusbar_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 53013D661A9E8B8E00C5D631 /* statusbar_icon.png */; };
 		532828DD1A9EB92B00137DB7 /* install.sh in Resources */ = {isa = PBXBuildFile; fileRef = 532828DC1A9EB8F500137DB7 /* install.sh */; };
@@ -65,6 +66,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		50C2CC9F1F37131C00C24D9D /* Sstp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sstp.swift; sourceTree = "<group>"; };
 		53013D661A9E8B8E00C5D631 /* statusbar_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = statusbar_icon.png; path = iSstp/statusbar_icon.png; sourceTree = SOURCE_ROOT; };
 		532828DC1A9EB8F500137DB7 /* install.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = install.sh; sourceTree = "<group>"; };
 		5347C40A1A9EA47200B77B5B /* WindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 				53A3582F1A9E3B4400A2185E /* AppDelegate.swift */,
 				5347C40A1A9EA47200B77B5B /* WindowController.swift */,
 				53A358311A9E3B4400A2185E /* ViewController.swift */,
+				50C2CC9F1F37131C00C24D9D /* Sstp.swift */,
 				536467FF1B7F419B00200D54 /* OptionViewController.swift */,
 				534F32211A9E47F9001B7745 /* Account.swift */,
 				53A358331A9E3B4400A2185E /* Images.xcassets */,
@@ -327,6 +330,7 @@
 				53A358321A9E3B4400A2185E /* ViewController.swift in Sources */,
 				536468011B7F602F00200D54 /* OptionViewController.swift in Sources */,
 				5347C40B1A9EA47200B77B5B /* WindowController.swift in Sources */,
+				50C2CCA01F37131C00C24D9D /* Sstp.swift in Sources */,
 				53A358301A9E3B4400A2185E /* AppDelegate.swift in Sources */,
 				534F32221A9E47F9001B7745 /* Account.swift in Sources */,
 			);
