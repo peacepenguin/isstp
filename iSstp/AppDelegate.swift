@@ -69,7 +69,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         let ud = UserDefaults.standard
         let dafaults: [String: Any] = [
-            "useExtSstpc": false,
+            "useExtSstpc": true,
             "sstpcPath": "/usr/local/sbin/sstpc"
         ]
         ud.register(defaults: dafaults)
