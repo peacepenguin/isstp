@@ -1,5 +1,5 @@
 # iSSTP
-an sstp-client GUI for Apple macOS / OSX  
+sstp-client GUI for Apple macOS / OSX  
 
 Download latest version:  
 https://github.com/peacepenguin/isstp/releases/download/1.4/iSSTP.v1.4.release.dmg
@@ -24,3 +24,8 @@ Then compile/install iSSTP to your 'Applications' folder
 Thanks for the hard work to the original author 'axot' https://github.com/axot  
 And some awesome features added by 'easybe' https://github.com/easybe  
 
+sstp-client is the underlying software that makes this all possible.
+http://sstp-client.sourceforge.net/  
+  
+Homebrew is a highly recommended way to install sstp-client and an awesome package manager for other open source software:  
+https://brew.sh/
