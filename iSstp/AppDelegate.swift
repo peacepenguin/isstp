@@ -15,7 +15,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     override func awakeFromNib()
     {
-        statusItem = NSStatusBar.system().statusItem(withLength: 20)
+        statusItem = NSStatusBar.system.statusItem(withLength: 20)
         let image: NSImage = NSImage(named: "statusbar_icon")!
 
         statusItem?.title = "Status Menu"
@@ -46,14 +46,24 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
-    func connect(_ sender: NSMenuItem) {
+  public func toggleStatusIconOn() {
+    let image: NSImage = NSImage(named: "statusbar_icon-connected")!
+    statusItem?.image = image
+  }
+
+  public func toggleStatusIconOff() {
+    let image: NSImage = NSImage(named: "statusbar_icon")!
+    statusItem?.image = image
+  }
+
+    @objc func connect(_ sender: NSMenuItem) {
         let account = sender.representedObject as! Account
         Sstp.sharedInstance.connect(account)
         sender.action = #selector(AppDelegate.disconnect)
         sender.title = "Disconnect \(account.display)"
     }
 
-    func disconnect(_ sender: NSMenuItem) {
+    @objc func disconnect(_ sender: NSMenuItem) {
         let account = sender.representedObject as! Account
         Sstp.sharedInstance.disconnect()
         sender.action = #selector(AppDelegate.connect)
@@ -84,13 +94,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @IBAction func open(_ sender: NSMenuItem) {
-        NSApplication.shared().unhide(self)
+        NSApplication.shared.unhide(self)
         NSApp.activate(ignoringOtherApps: true)
         NotificationCenter.default.post(name: Notification.Name(rawValue: "Window Open"), object: nil)
     }
 
     @IBAction func quit(_ sender: NSMenuItem) {
         NotificationCenter.default.post(name: Notification.Name(rawValue: "All Stop"), object: nil)
-        NSApplication.shared().terminate(self)
+        NSApplication.shared.terminate(self)
     }
 }
