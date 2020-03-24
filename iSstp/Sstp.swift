@@ -108,7 +108,9 @@ class Sstp: NSObject {
         if let ip = sstpIp() {
             updateStatus("Connected to server, your ip is: " + ip)
         } else {
-            updateStatus("Not Connected!")
+            //updateStatus("Not Connected!")
+            self.disconnect()
+            return()
         }
 
         if self.statusTimer == nil {
