@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		17CDC11723D1488400BC3420 /* statusbar_icon-connected.png in Resources */ = {isa = PBXBuildFile; fileRef = 17CDC11623D1488400BC3420 /* statusbar_icon-connected.png */; };
 		50C2CCA01F37131C00C24D9D /* Sstp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C2CC9F1F37131C00C24D9D /* Sstp.swift */; };
 		53013D631A9E89FC00C5D631 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 534F321B1A9E402C001B7745 /* logo.png */; };
 		53013D681A9E8B9D00C5D631 /* statusbar_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 53013D661A9E8B8E00C5D631 /* statusbar_icon.png */; };
@@ -22,7 +23,6 @@
 		534F32741A9E74F0001B7745 /* libz.1.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 534F32641A9E6C50001B7745 /* libz.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		534F32751A9E74F3001B7745 /* libsstp_api-0.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 534F32471A9E6A9D001B7745 /* libsstp_api-0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		534F32861A9E7F86001B7745 /* helper in Resources */ = {isa = PBXBuildFile; fileRef = 534F327E1A9E7F65001B7745 /* helper */; };
-		534F32971A9E8866001B7745 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 534F32961A9E8866001B7745 /* AppKit.framework */; };
 		536468011B7F602F00200D54 /* OptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536467FF1B7F419B00200D54 /* OptionViewController.swift */; };
 		53A358301A9E3B4400A2185E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A3582F1A9E3B4400A2185E /* AppDelegate.swift */; };
 		53A358321A9E3B4400A2185E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A358311A9E3B4400A2185E /* ViewController.swift */; };
@@ -66,6 +66,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		17CDC11623D1488400BC3420 /* statusbar_icon-connected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "statusbar_icon-connected.png"; path = "iSstp/iSstpTests/statusbar_icon-connected.png"; sourceTree = SOURCE_ROOT; };
+		17CDC11923D148C300BC3420 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		50C2CC9F1F37131C00C24D9D /* Sstp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sstp.swift; sourceTree = "<group>"; };
 		53013D661A9E8B8E00C5D631 /* statusbar_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = statusbar_icon.png; path = iSstp/statusbar_icon.png; sourceTree = SOURCE_ROOT; };
 		532828DC1A9EB8F500137DB7 /* install.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = install.sh; sourceTree = "<group>"; };
@@ -81,10 +83,9 @@
 		534F32641A9E6C50001B7745 /* libz.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libz.1.dylib; sourceTree = "<group>"; };
 		534F32761A9E7887001B7745 /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		534F327E1A9E7F65001B7745 /* helper */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = helper; sourceTree = BUILT_PRODUCTS_DIR; };
-		534F32961A9E8866001B7745 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		536467FF1B7F419B00200D54 /* OptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionViewController.swift; sourceTree = "<group>"; };
 		53A3582A1A9E3B4400A2185E /* iSstp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iSstp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		53A3582E1A9E3B4400A2185E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		53A3582E1A9E3B4400A2185E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
 		53A3582F1A9E3B4400A2185E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		53A358311A9E3B4400A2185E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		53A358331A9E3B4400A2185E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -105,7 +106,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				534F32971A9E8866001B7745 /* AppKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,6 +121,7 @@
 				532828DC1A9EB8F500137DB7 /* install.sh */,
 			);
 			name = "sstp-client";
+			path = ..;
 			sourceTree = "<group>";
 		};
 		534F32461A9E6A9D001B7745 /* lib */ = {
@@ -175,6 +176,7 @@
 		53A3582C1A9E3B4400A2185E /* iSstp */ = {
 			isa = PBXGroup;
 			children = (
+				53A358401A9E3B4400A2185E /* Supporting Files */,
 				53A3582F1A9E3B4400A2185E /* AppDelegate.swift */,
 				5347C40A1A9EA47200B77B5B /* WindowController.swift */,
 				53A358311A9E3B4400A2185E /* ViewController.swift */,
@@ -183,25 +185,14 @@
 				534F32211A9E47F9001B7745 /* Account.swift */,
 				53A358331A9E3B4400A2185E /* Images.xcassets */,
 				53A358351A9E3B4400A2185E /* Main.storyboard */,
-				53A3582D1A9E3B4400A2185E /* Supporting Files */,
 			);
 			path = iSstp;
-			sourceTree = "<group>";
-		};
-		53A3582D1A9E3B4400A2185E /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				534F32231A9E59D9001B7745 /* sstp-client */,
-				53A3582E1A9E3B4400A2185E /* Info.plist */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		53A3583F1A9E3B4400A2185E /* iSstpTests */ = {
 			isa = PBXGroup;
 			children = (
 				53A358421A9E3B4400A2185E /* iSstpTests.swift */,
-				53A358401A9E3B4400A2185E /* Supporting Files */,
 			);
 			path = iSstpTests;
 			sourceTree = "<group>";
@@ -209,12 +200,16 @@
 		53A358401A9E3B4400A2185E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				534F32231A9E59D9001B7745 /* sstp-client */,
+				17CDC11623D1488400BC3420 /* statusbar_icon-connected.png */,
 				53013D661A9E8B8E00C5D631 /* statusbar_icon.png */,
-				534F32961A9E8866001B7745 /* AppKit.framework */,
+				17CDC11923D148C300BC3420 /* AppKit.framework */,
 				534F321B1A9E402C001B7745 /* logo.png */,
 				53A358411A9E3B4400A2185E /* Info.plist */,
+				53A3582E1A9E3B4400A2185E /* Info.plist */,
 			);
 			name = "Supporting Files";
+			path = iSstpTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -272,7 +267,7 @@
 					};
 					53A358291A9E3B4400A2185E = {
 						CreatedOnToolsVersion = 6.1.1;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 1130;
 						ProvisioningStyle = Manual;
 					};
 				};
@@ -282,6 +277,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -301,6 +297,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17CDC11723D1488400BC3420 /* statusbar_icon-connected.png in Resources */,
 				53A358341A9E3B4400A2185E /* Images.xcassets in Resources */,
 				534F325C1A9E6A9D001B7745 /* sstpc in Resources */,
 				534F32861A9E7F86001B7745 /* helper in Resources */,
@@ -421,7 +418,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -469,7 +466,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -499,7 +496,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.axot.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -526,7 +524,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.axot.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};

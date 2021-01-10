@@ -17,6 +17,7 @@ class Sstp: NSObject {
     var statusTimer: Timer?
     var connectTimer: Timer?
     var connectCounter = 0
+    let appDelegate = NSApplication.shared.delegate as! AppDelegate
 
     private override init() {}
 
@@ -73,19 +74,23 @@ class Sstp: NSObject {
 
     func sstpIp() -> String? {
         let result: String = runCommand("/sbin/ifconfig ppp0 | grep 'inet' | awk '{ print $2}'")
-        if result.range(of: "ppp0") == nil && result.characters.count != 0 {
+      if result.range(of: "ppp0") == nil && (!result.isEmpty) {
             return result
         }
         return nil
     }
 
-    func connected() {
+  @objc func connected() {
         connectCounter += 1
 
         let timeout = connectCounter >= 10
 
         if sstpIp() == nil && !timeout {
             return
+        }
+        //show connected icon:
+        if(!timeout) {
+            appDelegate.toggleStatusIconOn()
         }
         connectTimer?.invalidate()
         connectTimer = nil
@@ -99,11 +104,13 @@ class Sstp: NSObject {
         checkStatus()
     }
 
-    func checkStatus() {
+  @objc func checkStatus() {
         if let ip = sstpIp() {
             updateStatus("Connected to server, your ip is: " + ip)
         } else {
-            updateStatus("Not Connected!")
+            //updateStatus("Not Connected!")
+            self.disconnect()
+            return()
         }
 
         if self.statusTimer == nil {
@@ -118,6 +125,9 @@ class Sstp: NSObject {
             self.statusTimer?.invalidate()
             self.statusTimer = nil
         }
+
+        //toggle connected icon off:
+        appDelegate.toggleStatusIconOff()
 
         let qualityOfServiceClass = DispatchQoS.QoSClass.background
         let backgroundQueue = DispatchQueue.global(qos: qualityOfServiceClass)

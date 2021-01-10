@@ -19,7 +19,7 @@ class ViewController: NSViewController, NSTableViewDelegate {
     @IBOutlet weak var editBtn: NSButton!
     @IBOutlet weak var connectBtn: NSButton!
 
-    dynamic var accounts: [Account] = []
+    @objc dynamic var accounts: [Account] = []
     let ud = UserDefaults.standard
 
     override func viewDidLoad() {
